@@ -1,6 +1,6 @@
 const checkLogIn = (req, res, next) => {
-  if(!req.session.id) {
-    res.render('signin')
+  if(!req.session.user) {
+    res.render('signin', {user: null})
   } else {
     next()
   }
