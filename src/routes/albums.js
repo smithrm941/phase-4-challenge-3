@@ -1,4 +1,7 @@
-app.get('/albums/:albumID', (req, res, next) => {
+const db = require('../db')
+const albums = require('express').Router()
+
+albums.get('/:albumID', (req, res) => {
   const albumID = req.params.albumID
 
   db.getAlbumsByID(albumID, (error, albums) => {

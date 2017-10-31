@@ -1,32 +1,24 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Vinyl</title>
+  <title>Vinyl : <%= user.name %></title>
   <link rel="stylesheet" type="text/css" href="/style.css">
   <script type="text/javascript" src="/script.js"></script>
 </head>
 <body>
 
-  <h1>Vinyl</h1>
-
-  <h2>Records</h2>
-
-  <div class="album-list">
-    <% albums.forEach(function(album) { %>
-      <div>
-        <h5><a href="/albums/<%= album.id %>"><%= album.title %></a></h5>
-        <span><%= album.artist %></span>
-      </div>
-    <% }) %>
-  </div>
+  <h1><%= user.name %></h1>
+  <h1><%= user.email %></h1>
+  <h1><%= user.join_date.toDateString().substring(0, 15) %></h1>
 
   <h2>Reviews</h2>
   <% reviews.forEach(function(review) { %>
     <h1><%= review.title %></h1>
     <h1><%= review.review_date.toDateString().substring(0, 15) %></h1>
     <h1><%= review.content %></h1>
-    <h1><%= review.review_author%></h1>
   <% }) %>
+
+  <!-- TODO: implement album reviews -->
 
 </body>
 </html>
