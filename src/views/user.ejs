@@ -2,11 +2,11 @@
 <html>
 <head>
   <title>Vinyl : <%= user.name %></title>
-  <link rel="stylesheet" type="text/css" href="/style.css">
-  <script type="text/javascript" src="/script.js"></script>
+  <%- include ./partials/scripts %>
+
 </head>
 <body>
-  <%- include ./navbar %>
+  <%- include ./partials/navbar %>
 
   <h1><%= user.name %></h1>
   <h1><%= user.email %></h1>
@@ -17,6 +17,9 @@
     <h1><%= review.title %></h1>
     <h1><%= review.review_date.toDateString().substring(0, 15) %></h1>
     <h1><%= review.content %></h1>
+    <% if (loggedInUser[0].id === review.author_id) { %>
+      <button class="fa fa-trash"></button>
+    <% } %>
   <% }) %>
 
   <!-- TODO: implement album reviews -->

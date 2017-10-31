@@ -2,11 +2,11 @@
 <html>
 <head>
   <title>Sign Up</title>
-  <link rel="stylesheet" type="text/css" href="/style.css">
-  <script type="text/javascript" src="/script.js"></script>
+  <%- include ./partials/scripts %>
+
 </head>
 <body>
-  <%- include ./navbar %>
+  <%- include ./partials/navbar %>
 
   <form action="/signup" method="POST">
     <label for="name">Name</label>

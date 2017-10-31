@@ -14,7 +14,7 @@ users.get('/:userID', (req, res) => {
           if (error) {
             res.status(500).render('error', {error})
           } else {
-            res.render('user', {user, reviews})
+            res.render('user', {user, reviews, loggedInUser: req.session.user})
           }
         })
       }

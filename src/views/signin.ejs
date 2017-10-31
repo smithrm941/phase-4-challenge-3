@@ -2,11 +2,11 @@
 <html>
 <head>
   <title>Sign In</title>
-  <link rel="stylesheet" type="text/css" href="/style.css">
-  <script type="text/javascript" src="/script.js"></script>
+  <%- include ./partials/scripts %>
+
 </head>
 <body>
-  <%- include ./navbar %>
+  <%- include ./partials/navbar %>
 
   <form action="/signin" method="POST">
     <label for="email">Email</label>

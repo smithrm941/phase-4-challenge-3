@@ -2,12 +2,12 @@
 <html>
 <head>
   <title>Vinyl</title>
-  <link rel="stylesheet" type="text/css" href="/style.css">
-  <script type="text/javascript" src="/script.js"></script>
+  <%- include ./partials/scripts %>
+
 </head>
 <body>
 
-  <%- include ./navbar %>
+  <%- include ./partials/navbar %>
 
 
   <h2>Records</h2>
@@ -26,7 +26,7 @@
     <h1><%= review.title %></h1>
     <h1><%= review.review_date.toDateString().substring(0, 15) %></h1>
     <h1><%= review.content %></h1>
-    <h1><%= review.review_author%></h1>
+    <h1><%= review.author_name%></h1>
   <% }) %>
 
 </body>

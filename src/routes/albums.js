@@ -14,7 +14,7 @@ albums.get('/:albumID', (req, res) => {
           if (error) {
             res.status(500).render('error', {error})
           } else {
-            res.render('album', {album, reviews, user: req.session.user})
+            res.render('album', {album, reviews, loggedInUser: req.session.user})
           }
         })
       }
@@ -29,7 +29,7 @@ albums.get('/:albumID/reviews/new', (req, res) => {
       res.status(500).render('error', {error})
     } else {
       const album = albums[0]
-      res.render('new_review', {album, user: req.session.user})
+      res.render('new_review', {album, loggedInUser: req.session.user})
     }
   })
 })

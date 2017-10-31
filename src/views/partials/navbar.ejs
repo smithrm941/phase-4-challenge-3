@@ -1,5 +1,7 @@
 <h1>Vinyl</h1>
-<% if(user) { %>
+<% if(loggedInUser) { %>
+  <a href="/">Vinyl</a>
+  <a href="/users/<%=loggedInUser[0].id%>">Profile</a>
   <a href="/signout"> Sign Out </a>
 <% } else { %>
   <a href="/signin"> Sign In </a>
