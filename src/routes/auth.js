@@ -10,8 +10,7 @@ auth.get('/', (req, res) => {
         if (error) {
           res.status(500).render('error', {error})
         } else {
-          console.log('here are the reviews::::', reviews)
-          res.render('index', {albums, reviews})
+          res.render('index', {albums, reviews, user: req.session.user})
         }
       })
     }
@@ -19,7 +18,7 @@ auth.get('/', (req, res) => {
 })
 
 auth.get('/signin', (req, res) => {
-  res.render('signin')
+  res.render('signin', {user: null})
 })
 
 auth.post('/signin', (req, res) => {
@@ -29,13 +28,14 @@ auth.post('/signin', (req, res) => {
     if (error) {
       res.status(500).render('error', {error})
     } else {
+      req.session.user = authenticatedUser
       res.redirect('/')
     }
   })
 })
 
 auth.get('/signup', (req, res) => {
-  res.render('signup')
+  res.render('signup', {user: null})
 })
 
 auth.post('/signup', (req, res) => {
@@ -45,9 +45,15 @@ auth.post('/signup', (req, res) => {
     if (error) {
       res.status(500).render('error', {error})
     } else {
+      req.session.user = newUser
       res.redirect('/')
     }
   })
+})
+
+auth.get('/signout', (req, res) => {
+ req.session.user = null
+ res.redirect('/')
 })
 
 module.exports = auth
