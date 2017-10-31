@@ -3,3 +3,20 @@ html, body {
   padding: 0;
   width: 100vw;
 }
+
+ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+
+li {
+  display: inline;
+  float: left;
+  padding: 0;
+  line-height: 10px;
+}
+
+.righthand-links {
+  float: right;
+}

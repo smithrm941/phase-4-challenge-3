@@ -1,9 +1,16 @@
-<h1>Vinyl</h1>
-<% if(loggedInUser) { %>
-  <a href="/">Vinyl</a>
-  <a href="/users/<%=loggedInUser[0].id%>">Profile</a>
-  <a href="/signout"> Sign Out </a>
-<% } else { %>
-  <a href="/signin"> Sign In </a>
-  <a href="/signup"> Sign Up </a>
-<% } %>
+<nav class="navbar navbar-default">
+  <ul>
+    <li><h4><a class="home-link" href="/" >Vinyl</a></h4></li>
+    <% if(loggedInUser) { %>
+        <div class="righthand-links">
+          <li><a class="nav-item nav-link profile" href="/users/<%=loggedInUser[0].id%>"> Profile </a></li>
+          <li><a class="nav-item nav-link signout" href="/signout"> Sign Out </a></li>
+        </div>
+      <% } else if (!loggedInUser) { %>
+        <div class="righthand-links">
+          <li><a class="nav-item nav-link signup" href="/signup"> Sign Up </a></li>
+          <li><a class="nav-item nav-link signin" href="/signin"> Sign In </a></li>
+        </div>
+      <% } %>
+  </ul>
+</nav>
