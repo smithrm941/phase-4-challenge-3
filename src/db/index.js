@@ -37,10 +37,11 @@ function createUser(userData, cb) {
 
 //Sign in query:
 function findExistingUser(userData, cb) {
-  _query(`SELECT
-            * FROM users
-          WHERE
-            email = $1 AND password = $2`, [userData.email, userData.password], cb)
+  _query(
+    `SELECT
+      * FROM users
+     WHERE
+      email = $1 AND password = $2`, [userData.email, userData.password], cb)
 }
 
 //Album page queries:
@@ -49,16 +50,28 @@ function getAlbumsByID(albumID, cb) {
 }
 
 function getReviewsByAlbumID(albumID, cb) {
-  _query(`SELECT
-            reviews.*, albums.*, users.name AS review_author
-          FROM
-            reviews, users, albums
-          WHERE
-            reviews.album_id = albums.id
-          AND
-            reviews.author_id = users.id
-          AND
-            reviews.album_id = $1`, [albumID], cb)
+  _query(
+    `SELECT
+      reviews.*, albums.*, users.name AS review_author
+    FROM
+      reviews, users, albums
+    WHERE
+      reviews.album_id = albums.id
+    AND
+      reviews.author_id = users.id
+    AND
+      reviews.album_id = $1
+    ORDER BY
+      review_date DESC`, [albumID], cb)
+}
+
+//New review page queries:
+function createReview(newReview, cb) {
+  _query(
+    `INSERT INTO
+      reviews (content, author_id, album_id)
+     VALUES
+      ($1, $2, $3)`, [newReview.content, newReview.author, newReview.album], cb)
 }
 
 
@@ -68,16 +81,19 @@ function getUsersByID(userID, cb) {
 }
 
 function getReviewsByUserID(userID, cb) {
-  _query(`SELECT
-            reviews.*, albums.*
-          FROM
-            reviews, users, albums
-          WHERE
-            reviews.album_id = albums.id
-          AND
-            reviews.author_id = users.id
-          AND
-            reviews.author_id = $1`, [userID], cb)
+  _query(
+    `SELECT
+      reviews.*, albums.*
+     FROM
+      reviews, users, albums
+     WHERE
+      reviews.album_id = albums.id
+     AND
+      reviews.author_id = users.id
+     AND
+      reviews.author_id = $1
+     ORDER BY
+      review_date DESC`, [userID], cb)
 }
 
 function _query(sql, variables, cb) {
@@ -102,6 +118,7 @@ module.exports = {
   findExistingUser,
   getAlbumsByID,
   getReviewsByAlbumID,
+  createReview,
   getUsersByID,
   getReviewsByUserID
 }

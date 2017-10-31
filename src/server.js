@@ -27,6 +27,11 @@ app.use(session({
 
 app.use('/', routes)
 
+app.use((req, res, next) => {
+  res.locals.user = {}
+  next();
+})
+
 app.use((req, res) => {
   res.status(404).render('not_found')
 })

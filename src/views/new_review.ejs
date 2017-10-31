@@ -8,7 +8,7 @@
 <body>
   <%- include ./navbar %>
   <h1>New Review for <%= album.title %></h1>
-  <form>
+  <form action="/albums/<%= album.id%>/reviews/new" method="POST">
     <textarea class="new-review-box" rows="15" cols="55" name="content"></textarea>
     <button type="submit">Submit</button>
   </form>
