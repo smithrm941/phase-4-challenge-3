@@ -31,8 +31,22 @@ function getAlbumsByID(albumID, cb) {
   _query('SELECT * FROM albums WHERE id = $1', [albumID], cb)
 }
 
+function getReviewsByAlbumID(albumID, cb) {
+  _query(`SELECT
+            reviews.*, albums.*, users.name AS review_author
+          FROM
+            reviews, users, albums
+          WHERE
+            reviews.album_id = albums.id
+          AND
+            reviews.author_id = users.id
+          AND
+            reviews.album_id = $1`, [albumID], cb)
+}
+
+
 //User page queries:
-function getUserByID(userID, cb) {
+function getUsersByID(userID, cb) {
   _query('SELECT * FROM users WHERE id = $1', [userID], cb)
 }
 
@@ -68,6 +82,7 @@ module.exports = {
   getAlbums,
   getRecentReviews,
   getAlbumsByID,
-  getUserByID,
+  getReviewsByAlbumID,
+  getUsersByID,
   getReviewsByUserID
 }

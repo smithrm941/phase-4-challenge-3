@@ -4,7 +4,7 @@ const users = require('express').Router()
 users.get('/:userID', (req, res) => {
   const userID = req.params.userID
 
-  db.getUserByID(userID, (error, users) => {
+  db.getUsersByID(userID, (error, users) => {
     if (error) {
       res.status(500).render('error', {error})
     } else {
@@ -14,7 +14,7 @@ users.get('/:userID', (req, res) => {
           if (error) {
             res.status(500).render('error', {error})
           } else {
-            res.render('user', {user, reviews})  
+            res.render('user', {user, reviews})
           }
         })
       }
