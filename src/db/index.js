@@ -26,6 +26,23 @@ function getRecentReviews(cb) {
      LIMIT 3;`, [], cb)
 }
 
+//Sign up query:
+function createUser(userData, cb) {
+  _query(
+    `INSERT INTO
+      users (name, email, password)
+     VALUES
+      ($1, $2, $3)`, [userData.name, userData.email, userData.password], cb)
+}
+
+//Sign in query:
+function findExistingUser(userData, cb) {
+  _query(`SELECT
+            * FROM users
+          WHERE
+            email = $1 AND password = $2`, [userData.email, userData.password], cb)
+}
+
 //Album page queries:
 function getAlbumsByID(albumID, cb) {
   _query('SELECT * FROM albums WHERE id = $1', [albumID], cb)
@@ -81,6 +98,8 @@ function _query(sql, variables, cb) {
 module.exports = {
   getAlbums,
   getRecentReviews,
+  createUser,
+  findExistingUser,
   getAlbumsByID,
   getReviewsByAlbumID,
   getUsersByID,
