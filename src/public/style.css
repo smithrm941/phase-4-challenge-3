@@ -40,7 +40,7 @@ li {
   float: right;
 }
 
-/*Sign In page:::*/
+/*Sign In and Sign Up pages:::*/
 .authentication-form-title {
   text-align: center;
 }
@@ -121,4 +121,19 @@ li {
   margin: auto;
   width: 70%;
   padding: 0px;
+}
+
+/*New Review Form page:::*/
+.new-review-form-title {
+  padding-left: 200px;
+}
+
+.new-review-form {
+  padding-left: 250px;
+  padding-right: 200px;
+}
+
+.new-review-submit-button {
+  float: right;
+  margin-left: 396px;
 }
