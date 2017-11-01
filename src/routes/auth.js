@@ -18,18 +18,23 @@ auth.get('/', (req, res) => {
 })
 
 auth.get('/signin', (req, res) => {
-  res.render('signin', {loggedInUser: null})
+  res.render('signin', {loggedInUser: null, message: ''})
 })
 
 auth.post('/signin', (req, res) => {
   userData = req.body
   const {email, password} = userData
-  db.findExistingUser(userData, (error, authenticatedUser) => {
+  db.findExistingUser(userData, (error, currentUser) => {
+    let authenticatedUser = currentUser[0]
     if (error) {
       res.status(500).render('error', {error})
     } else {
-      req.session.user = authenticatedUser
-      res.redirect('/')
+      if(!authenticatedUser){
+        res.render('signin', {loggedInUser: null, message: 'Incorrect email or password.'})
+      } else {
+        req.session.user = authenticatedUser
+        res.redirect('/')
+      }
     }
   })
 })
