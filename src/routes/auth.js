@@ -24,7 +24,7 @@ auth.get('/signin', (req, res) => {
 auth.post('/signin', (req, res) => {
   userData = req.body
   const {email, password} = userData
-  db.findExistingUser(userData, (error, currentUser) => {
+  db.authenticateExistingUser(userData, (error, currentUser) => {
     if (error) {
       res.status(500).render('error', {error})
     } else {
@@ -40,20 +40,36 @@ auth.post('/signin', (req, res) => {
 })
 
 auth.get('/signup', (req, res) => {
-  res.render('signup', {loggedInUser: null})
+  res.render('signup', {loggedInUser: null, message: ''})
 })
 
 auth.post('/signup', (req, res) => {
   userData = req.body
   const {name, email, password} = userData
-  db.createUser(userData, (error, newUser) => {
-    if (error) {
-      res.status(500).render('error', {error})
-    } else {
-      req.session.user = newUser
-      res.redirect('/')
-    }
-  })
+  if(!userData.name || !userData.email || !userData.password){
+    res.render('signup', {loggedInUser: null, message: 'No fields can be left blank'})
+  } else {
+    db.checkDatabaseForEmail(userData, (error, existingUser) => {
+      if (error) {
+        res.status(500).render('error', {error})
+      } else {
+        let userExists = existingUser[0]
+        if(userExists) {
+          res.render('signup', {loggedInUser: null, message: 'User already exists'})
+        } else {
+          db.createUser(userData, (error, newUser) => {
+            if (error) {
+              res.status(500).render('error', {error, loggedInUser: req.session.user})
+            } else {
+              const loggedInUser = newUser[0]
+              req.session.user = loggedInUser
+              res.redirect(`/users/${loggedInUser.id}`)
+            }
+          })
+        }
+      }
+    })
+  }
 })
 
 auth.get('/signout', (req, res) => {

@@ -27,7 +27,7 @@
       <h5 class="review-id"><%= review.review_id %></h5>
       <h5 class="album-reviewed col-md-8"><%= review.title %></h1>
       <h5 class="review-date"><%= review.review_date.toDateString().substring(0, 15) %></h1>
-      <% if (loggedInUser[0].id === review.author_id) { %>
+      <% if (loggedInUser.id === review.author_id) { %>
         <button class="fa fa-trash"></button>
       <% } %>
       <h6 class="review-content"><%= review.content %></h1>
