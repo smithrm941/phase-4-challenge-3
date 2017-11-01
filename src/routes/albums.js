@@ -48,4 +48,15 @@ albums.post('/:albumID/reviews/new', (req, res) => {
   })
 })
 
+albums.delete('/reviews/delete/:reviewId', (req, res) => {
+  const reviewId = req.params.reviewId
+  db.deleteReviewsById(reviewId, (error, review) => {
+    if (error) {
+      res.status(500).render('error', {error})
+    } else {
+      res.redirect(`/albums/${review[0].album_id}`)
+    }
+  })
+})
+
 module.exports = albums

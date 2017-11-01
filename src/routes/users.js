@@ -22,4 +22,15 @@ users.get('/:userID', (req, res) => {
   })
 })
 
+users.delete('/reviews/delete/:reviewId', (req, res) => {
+  const reviewId = req.params.reviewId
+  db.deleteReviewsById(reviewId, (error, review) => {
+    if (error) {
+      res.status(500).render('error', {error})
+    } else {
+      res.redirect(`/users/${review[0].author_id}`)
+    }
+  })
+})
+
 module.exports = users

@@ -9,5 +9,4 @@ router.use(middleware.checkLogIn)
 router.use('/albums', albums)
 router.use('/users', users)
 
-
 module.exports = router

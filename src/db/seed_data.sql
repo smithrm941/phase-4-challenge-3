@@ -12,7 +12,7 @@ INSERT INTO
 VALUES
   ('Homer Simpson', 'homer@gmail.com', 'homer'),
   ('Marge Simpson', 'marge@gmail.com', 'marge'),
-  ('Bart Simpson', 'bart@gamil.com', 'bart'),
+  ('Bart Simpson', 'bart@gmail.com', 'bart'),
   ('Lisa Simpson', 'lisa@gmail.com', 'lisa'),
   ('Maggie Simpson', 'maggie@gmail.com', 'maggie')
 ;
