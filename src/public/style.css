@@ -10,6 +10,7 @@ ul {
   padding: 0;
 }
 
+/*Navbar::::*/
 li {
   display: inline;
   float: left;
@@ -17,6 +18,51 @@ li {
   line-height: 10px;
 }
 
+.navbar {
+  height: 40px;
+}
+
 .righthand-links {
   float: right;
+}
+
+/*Homepage:::*/
+.home-page-image {
+  height: 400px;
+  width: 100%;
+}
+
+.album-list {
+  float: left;
+}
+
+.recent-reviews {
+  float: right;
+}
+
+/*Album reviews:::*/
+.recent-reviews-heading {
+  margin-left: 11px;
+}
+
+.album-reviewed {
+  display: inline-block;
+}
+
+.review-date {
+  display: inline-block;
+  margin-right: 30px;
+}
+
+.review-content {
+  margin-left: 14px;
+  margin-right: 45px;
+}
+
+.space-before-author {
+  display: inline-block;
+}
+
+.review-author {
+  display: inline-block;
 }

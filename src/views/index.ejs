@@ -7,27 +7,37 @@
 </head>
 <body>
 
-  <%- include ./partials/navbar %>
+<%- include ./partials/navbar %>
 
+<img class="home-page-image" src="https://static.pexels.com/photos/19951/arm-sound-retro-audio-19951.jpg" />
+<br>
+<br>
 
+<div class="album-list col-md-4">
   <h2>Records</h2>
-
-  <div class="album-list">
-    <% albums.forEach(function(album) { %>
-      <div>
-        <h5><a href="/albums/<%= album.id %>"><%= album.title %></a></h5>
-        <span><%= album.artist %></span>
-      </div>
-    <% }) %>
-  </div>
-
-  <h2>Reviews</h2>
-  <% reviews.forEach(function(review) { %>
-    <h1><%= review.title %></h1>
-    <h1><%= review.review_date.toDateString().substring(0, 15) %></h1>
-    <h1><%= review.content %></h1>
-    <h1><%= review.author_name%></h1>
+  <br>
+  <% albums.forEach(function(album) { %>
+    <div>
+      <h5><a href="/albums/<%= album.id %>"><%= album.title %></a></h5>
+      <span><%= album.artist %></span>
+    </div>
+    <br>
   <% }) %>
+</div>
+
+<div class="recent-reviews col-md-8">
+  <h2 class="recent-reviews-heading">Recent Reviews</h2>
+  <br>
+  <% reviews.forEach(function(review) { %>
+    <h5 class="album-reviewed col-md-9"><a href="/albums/<%= review.album_id %>"><%= review.title %></a></h5>
+    <h5 class="review-date"><%= review.review_date.toDateString().substring(0, 15) %></h5>
+    <h6 class="review-content"><%= review.content %></h6>
+    <h5 class="space-before-author col-md-8"></h5><h5 class="review-author">by <a href="/users/<%= review.author_id %>"><%= review.author_name%></a></h5>
+    <br>
+    <br>
+    <br>
+  <% }) %>
+</div>
 
 </body>
 </html>
