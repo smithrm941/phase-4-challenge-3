@@ -52,7 +52,7 @@ function getAlbumsByID(albumID, cb) {
 function getReviewsByAlbumID(albumID, cb) {
   _query(
     `SELECT
-      reviews.*, albums.*, users.name AS author_name
+      reviews.id AS review_id, reviews.review_date, reviews.content, albums.id, albums.title, albums.artist
     FROM
       reviews, users, albums
     WHERE
@@ -83,17 +83,34 @@ function getUsersByID(userID, cb) {
 function getReviewsByUserID(userID, cb) {
   _query(
     `SELECT
-      reviews.*, albums.*
+      reviews.id AS review_id, reviews.review_date, reviews.content, albums.id, albums.title, albums.artist
      FROM
       reviews, users, albums
      WHERE
       reviews.album_id = albums.id
      AND
-      reviews.author_id = users.id
-     AND
       reviews.author_id = $1
+     AND
+      reviews.author_id = users.id
      ORDER BY
       review_date DESC`, [userID], cb)
+}
+
+//Deleting review queries:
+function getReviewsByAlbumTitle(albumTitle, cb) {
+  _query(
+    `SELECT
+      reviews.id AS review_id, reviews.review_date, reviews.content, albums.id, albums.title, albums.artist
+    FROM
+      reviews, users, albums
+    WHERE
+      reviews.album_id = albums.id
+    AND
+      reviews.author_id = users.id
+    AND
+      albums.title = $1
+    ORDER BY
+      review_date DESC`, [albumTitle], cb)
 }
 
 function _query(sql, variables, cb) {
@@ -120,5 +137,6 @@ module.exports = {
   getReviewsByAlbumID,
   createReview,
   getUsersByID,
-  getReviewsByUserID
+  getReviewsByUserID,
+  getReviewsByAlbumTitle
 }

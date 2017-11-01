@@ -41,6 +41,14 @@ li {
 }
 
 /*Album reviews:::*/
+.album-id {
+  display: none;
+}
+
+.review-id {
+  display: none;
+}
+
 .recent-reviews-heading {
   margin-left: 11px;
 }
