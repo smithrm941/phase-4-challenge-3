@@ -20,22 +20,28 @@
   </div>
   <br>
   <br>
-  <% reviews.forEach(function(review) { %>
-  <div class="album-page-individual-review">
-    <div class="individual-review">
-      <h5 class="album-id"><%= review.album_id %></h5>
-      <h5 class="review-id"><%= review.review_id %></h5>
-      <h5 class="album-reviewed col-md-8"><%= review.title %></h1>
-      <h5 class="review-date"><%= review.review_date.toDateString().substring(0, 15) %></h1>
-      <% if (loggedInUser.id === review.author_id) { %>
-        <button class="fa fa-trash"></button>
-      <% } %>
-      <h6 class="review-content"><%= review.content %></h1>
-      <h5 class="space-before-author col-md-8"></h5><h5 class="review-author">by <a href="/users/<%= review.author_id %>"><%= review.author_name%></a></h5>
-    </div>
+  <div class="album-page-review-list">
+    <% if (reviews.length === 0) { %>
+      <h5 class="col-md-12">No reviews yet!</h5>
+    <% } else { %>
+      <% reviews.forEach(function(review) { %>
+      <div class="album-page-individual-review">
+        <div class="individual-review">
+          <h5 class="album-id"><%= review.album_id %></h5>
+          <h5 class="review-id"><%= review.review_id %></h5>
+          <h5 class="album-reviewed col-md-8"><%= review.title %></h1>
+          <h5 class="review-date"><%= review.review_date.toDateString().substring(0, 15) %></h1>
+          <% if (loggedInUser.id === review.author_id) { %>
+            <button class="fa fa-trash"></button>
+          <% } %>
+          <h6 class="review-content"><%= review.content %></h1>
+          <h5 class="space-before-author col-md-8"></h5><h5 class="review-author">by <a href="/users/<%= review.author_id %>"><%= review.author_name%></a></h5>
+        </div>
+      </div>
+      <br>
+      <% }) %>
+    <% } %>
   </div>
-  <br>
-  <% }) %>
 
   <!-- TODO: implement album reviews -->
 

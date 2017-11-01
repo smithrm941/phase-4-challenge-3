@@ -28,15 +28,19 @@
 <div class="recent-reviews col-md-9">
   <h2 class="recent-reviews-heading">Recent Reviews</h2>
   <br>
-  <% reviews.forEach(function(review) { %>
-    <h5 class="album-reviewed col-md-9"><a href="/albums/<%= review.album_id %>"><%= review.title %></a></h5>
-    <h5 class="review-date"><%= review.review_date.toDateString().substring(0, 15) %></h5>
-    <h6 class="review-content"><%= review.content %></h6>
-    <h5 class="space-before-author col-md-8"></h5><h5 class="review-author">by <a href="/users/<%= review.author_id %>"><%= review.author_name%></a></h5>
-    <br>
-    <br>
-    <br>
-  <% }) %>
+  <% if (reviews.length === 0) { %>
+    <h5 class="col-md-11">No reviews yet! Want to add a review? Click on an album title to get started.</h5>
+  <%}else{%>
+    <% reviews.forEach(function(review) { %>
+      <h5 class="album-reviewed col-md-9"><a href="/albums/<%= review.album_id %>"><%= review.title %></a></h5>
+      <h5 class="review-date"><%= review.review_date.toDateString().substring(0, 15) %></h5>
+      <h6 class="review-content"><%= review.content %></h6>
+      <h5 class="space-before-author col-md-8"></h5><h5 class="review-author">by <a href="/users/<%= review.author_id %>"><%= review.author_name%></a></h5>
+      <br>
+      <br>
+      <br>
+    <% }) %>
+  <% } %>
 </div>
 
 </body>

@@ -81,6 +81,12 @@ li {
   margin-left: 190px;
 }
 
+.album-page-review-list {
+  margin: auto;
+  width: 70%;
+  padding: 0px;
+}
+
 .album-page-review-list-heading {
   display: block;
   text-align: left;
@@ -93,12 +99,6 @@ li {
 
 .get-new-review-page-button {
   display: inline-block;
-}
-
-.album-page-individual-review {
-  margin: auto;
-  width: 70%;
-  padding: 0px;
 }
 
 /*New Review Form page:::*/

@@ -94,7 +94,7 @@ function getUsersByID(userID, cb) {
 function getReviewsByUserID(userID, cb) {
   _query(
     `SELECT
-      reviews.id AS review_id, reviews.review_date, reviews.content, reviews.author_id, users.name AS author_name, albums.id, albums.title, albums.artist
+      reviews.id AS review_id, reviews.review_date, reviews.content, reviews.author_id, users.name AS author_name, albums.id AS album_id, albums.title, albums.artist
      FROM
       reviews, users, albums
      WHERE
