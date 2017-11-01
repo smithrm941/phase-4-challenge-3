@@ -6,116 +6,143 @@ const client = new pg.Client(connectionString)
 
 client.connect()
 
-//Home page queries:
+// Home page queries:
 function getAlbums(cb) {
-  _query('SELECT * FROM albums', [], cb)
+  _query(
+    `SELECT
+     *
+     FROM albums`, [], cb)
 }
 
 function getRecentReviews(cb) {
   _query(
     `SELECT
-	    albums.title, users.name AS author_name, reviews.*
+     albums.title, users.name AS author_name, reviews.*
      FROM
-	    reviews, users, albums
+     reviews, users, albums
      WHERE
-	    reviews.album_id = albums.id
+     reviews.album_id = albums.id
      AND
-	    reviews.author_id = users.id
+     reviews.author_id = users.id
      ORDER BY
-	    review_date DESC
+     review_date DESC
      LIMIT 3;`, [], cb)
 }
 
-//Sign up queries:
+// Sign up queries:
 function checkDatabaseForEmail(userData, cb) {
   _query(
     `SELECT
-      *
-    FROM
+     *
+     FROM
      users
-    WHERE
+     WHERE
      email = $1`, [userData.email], cb)
 }
 function createUser(userData, cb) {
   _query(
     `INSERT INTO
-      users (name, email, password)
+     users (name, email, password)
      VALUES
-      ($1, $2, $3)
+     ($1, $2, $3)
      RETURNING
-      *`, [userData.name, userData.email, userData.password], cb)
+     *`, [userData.name, userData.email, userData.password], cb)
 }
 
-//Sign in query:
+// Sign in query:
 function authenticateExistingUser(userData, cb) {
   _query(
     `SELECT
-      * FROM users
+     *
+     FROM users
      WHERE
-      email = $1 AND password = $2`, [userData.email, userData.password], cb)
+     email = $1 AND password = $2`, [userData.email, userData.password], cb)
 }
 
-//Album page queries:
+// Album page queries:
 function getAlbumsByID(albumID, cb) {
-  _query('SELECT * FROM albums WHERE id = $1', [albumID], cb)
+  _query(
+    `SELECT
+     *
+     FROM
+     albums
+     WHERE id = $1`, [albumID], cb)
 }
 
 function getReviewsByAlbumID(albumID, cb) {
   _query(
     `SELECT
-      reviews.id AS review_id, reviews.review_date, reviews.content, reviews.author_id, users.name AS author_name, albums.id, albums.title, albums.artist
-    FROM
-      reviews, users, albums
-    WHERE
-      reviews.album_id = albums.id
-    AND
-      reviews.author_id = users.id
-    AND
-      reviews.album_id = $1
-    ORDER BY
-      review_date DESC`, [albumID], cb)
+     reviews.id AS review_id,
+     reviews.review_date,
+     reviews.content,
+     reviews.author_id,
+     users.name AS author_name,
+     albums.id,
+     albums.title,
+     albums.artist
+     FROM
+     reviews, users, albums
+     WHERE
+     reviews.album_id = albums.id
+     AND
+     reviews.author_id = users.id
+     AND
+     reviews.album_id = $1
+     ORDER BY
+     review_date DESC`, [albumID], cb)
 }
 
-//New review page queries:
+// New review page queries:
 function createReview(newReview, cb) {
   _query(
     `INSERT INTO
-      reviews (content, author_id, album_id)
-     VALUES
-      ($1, $2, $3)`, [newReview.content, newReview.author, newReview.album], cb)
+    reviews (content, author_id, album_id)
+    VALUES
+    ($1, $2, $3)`, [newReview.content, newReview.author, newReview.album_id], cb)
 }
 
 
-//User page queries:
+// User page queries:
 function getUsersByID(userID, cb) {
-  _query('SELECT * FROM users WHERE id = $1', [userID], cb)
+  _query(
+    `SELECT
+     *
+     FROM users
+     WHERE id = $1`, [userID], cb)
 }
 
 function getReviewsByUserID(userID, cb) {
   _query(
     `SELECT
-      reviews.id AS review_id, reviews.review_date, reviews.content, reviews.author_id, users.name AS author_name, albums.id AS album_id, albums.title, albums.artist
+     reviews.id AS review_id,
+     reviews.review_date,
+     reviews.content,
+     reviews.author_id,
+     users.name AS author_name,
+     albums.id AS album_id,
+     albums.title,
+     albums.artist
      FROM
-      reviews, users, albums
+     reviews, users, albums
      WHERE
-      reviews.album_id = albums.id
+     reviews.album_id = albums.id
      AND
-      reviews.author_id = $1
+     reviews.author_id = $1
      AND
-      reviews.author_id = users.id
+     reviews.author_id = users.id
      ORDER BY
-      review_date DESC`, [userID], cb)
+     review_date DESC`, [userID], cb)
 }
 
-//Deleting review queries:
+// Deleting review queries:
 function deleteReviewsById(id, cb) {
   _query(
     `DELETE FROM
-      reviews
+     reviews
      WHERE
-      id = $1
+     id = $1
      RETURNING
-      *;`, [id], cb)
+     *;`, [id], cb)
 }
 
 function _query(sql, variables, cb) {
@@ -144,5 +171,5 @@ module.exports = {
   createReview,
   getUsersByID,
   getReviewsByUserID,
-  deleteReviewsById
+  deleteReviewsById,
 }
