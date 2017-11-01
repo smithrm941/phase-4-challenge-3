@@ -3,18 +3,17 @@ const users = require('express').Router()
 
 users.get('/:userID', (req, res) => {
   const userID = req.params.userID
-
   db.getUsersByID(userID, (error, users) => {
     if (error) {
-      res.status(500).render('error', {error})
+      res.status(500).render('error', {error, loggedInUser: req.session.user})
     } else {
-      const user = users[0]
-      if(user) {
-        db.getReviewsByUserID(user.id, (error, reviews) => {
+      const profile = users[0]
+      if(profile) {
+        db.getReviewsByUserID(profile.id, (error, reviews) => {
           if (error) {
-            res.status(500).render('error', {error})
+            res.status(500).render('error', {error, loggedInUser: req.session.user})
           } else {
-            res.render('user', {user, reviews, loggedInUser: req.session.user})
+            res.render('user', {profile, reviews, loggedInUser: req.session.user, message: ''})
           }
         })
       }

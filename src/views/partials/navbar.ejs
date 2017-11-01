@@ -3,7 +3,7 @@
     <li><h4><a class="home-link" href="/" >Vinyl</a></h4></li>
     <% if(loggedInUser) { %>
         <div class="righthand-links">
-          <li><a class="nav-item nav-link profile" href="/users/<%=loggedInUser[0].id%>"> Profile </a></li>
+          <li><a class="nav-item nav-link profile" href="/users/<%=loggedInUser.id%>"> Profile </a></li>
           <li><a class="nav-item nav-link signout" href="/signout"> Sign Out </a></li>
         </div>
       <% } else if (!loggedInUser) { %>

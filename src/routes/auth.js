@@ -25,15 +25,15 @@ auth.post('/signin', (req, res) => {
   userData = req.body
   const {email, password} = userData
   db.findExistingUser(userData, (error, currentUser) => {
-    let authenticatedUser = currentUser[0]
     if (error) {
       res.status(500).render('error', {error})
     } else {
-      if(!authenticatedUser){
+      let loggedInUser = currentUser[0]
+      if(loggedInUser === undefined){
         res.render('signin', {loggedInUser: null, message: 'Incorrect email or password.'})
       } else {
-        req.session.user = authenticatedUser
-        res.redirect('/')
+        req.session.user = loggedInUser
+        res.redirect(`/users/${loggedInUser.id}`)
       }
     }
   })
