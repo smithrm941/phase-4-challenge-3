@@ -57,43 +57,21 @@ li {
   margin-left: 182px;
 }
 
-/*Album reviews:::*/
-.album-id {
-  display: none;
-}
-
-.review-id {
-  display: none;
-}
-
-.recent-reviews-heading {
-  margin-left: 11px;
-}
-
-.album-reviewed {
+/*User page:::*/
+.profile-pic {
   display: inline-block;
+  vertical-align: middle;
 }
 
-.review-date {
+.user-page-title {
   display: inline-block;
-  margin-right: 30px;
+  margin-left: 20px;
+  vertical-align: middle;
 }
 
-.fa-trash {
-  display: inline-block;
-}
-
-.review-content {
-  margin-left: 14px;
-  margin-right: 45px;
-}
-
-.space-before-author {
-  display: inline-block;
-}
-
-.review-author {
-  display: inline-block;
+.user-review-list {
+  padding-left: 210px;
+  padding-right: 180px;
 }
 
 /*Album page:::*/
@@ -136,4 +114,43 @@ li {
 .new-review-submit-button {
   float: right;
   margin-left: 396px;
+}
+
+/*Album reviews (user and album pages):::*/
+.album-id {
+  display: none;
+}
+
+.review-id {
+  display: none;
+}
+
+.recent-reviews-heading {
+  margin-left: 11px;
+}
+
+.album-reviewed {
+  display: inline-block;
+}
+
+.review-date {
+  display: inline-block;
+  margin-right: 30px;
+}
+
+.fa-trash {
+  display: inline-block;
+}
+
+.review-content {
+  margin-left: 14px;
+  margin-right: 45px;
+}
+
+.space-before-author {
+  display: inline-block;
+}
+
+.review-author {
+  display: inline-block;
 }
