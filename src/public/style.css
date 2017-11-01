@@ -54,6 +54,10 @@ li {
   margin-right: 30px;
 }
 
+.fa-trash {
+  display: inline-block;
+}
+
 .review-content {
   margin-left: 14px;
   margin-right: 45px;
@@ -65,4 +69,31 @@ li {
 
 .review-author {
   display: inline-block;
+}
+
+/*Album page:::*/
+.album-page-heading {
+  display: block;
+  text-align: left;
+  margin-left: 190px;
+}
+
+.album-page-review-list-heading {
+  display: block;
+  text-align: left;
+  margin-left: 172px;
+}
+
+.album-page-review-list-title {
+  display: inline-block;
+}
+
+.get-new-review-page-button {
+  display: inline-block;
+}
+
+.album-page-individual-review {
+  margin: auto;
+  width: 70%;
+  padding: 0px;
 }

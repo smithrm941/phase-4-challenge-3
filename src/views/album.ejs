@@ -6,22 +6,33 @@
 </head>
 <body>
   <%- include ./partials/navbar %>
-  <h1><%= album.title %></h1>
-  <em>by <%= album.artist %></em>
-
-  <form action="/albums/<%= album.id%>/reviews/new" method="GET">
-    <button type="Submit">New Review</button>
-  </form>
-
-  <h2>Reviews</h2>
+  <br>
+  <div class="album-page-heading">
+    <h1 ><%= album.title %></h1>
+    <em>by <%= album.artist %></em>
+  </div>
+  <br>
+  <div class="album-page-review-list-heading">
+    <h2 class="album-page-review-list-title col-md-7">Reviews</h2>
+    <form class="get-new-review-page-button"action="/albums/<%= album.id%>/reviews/new" method="GET">
+      <button type="Submit">Add Review</button>
+    </form>
+  </div>
+  <br>
+  <br>
   <% reviews.forEach(function(review) { %>
-    <h1><%= review.title %></h1>
-    <h1><%= review.review_date.toDateString().substring(0, 15) %></h1>
-    <h1><%= review.content %></h1>
-    <h1><%= review.author_name%></h1>
-    <% if (loggedInUser[0].id === review.author_id) { %>
-      <button class="fa fa-trash"></button>
-    <% } %>
+  <div class="album-page-individual-review">
+    <div class="individual-review">
+      <h5 class="album-reviewed col-md-8"><%= review.title %></h1>
+      <h5 class="review-date"><%= review.review_date.toDateString().substring(0, 15) %></h1>
+      <% if (loggedInUser[0].id === review.author_id) { %>
+        <button class="fa fa-trash"></button>
+      <% } %>
+      <h6 class="review-content"><%= review.content %></h1>
+      <h5 class="space-before-author col-md-8"></h5><h5 class="review-author">by <a href="/users/<%= review.author_id %>"><%= review.author_name%></a></h5>
+    </div>
+  </div>
+  <br>
   <% }) %>
 
   <!-- TODO: implement album reviews -->
