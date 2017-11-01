@@ -7,8 +7,10 @@
 </head>
 <body>
   <%- include ./partials/navbar %>
-
-  <form action="/signup" method="POST">
+  <h1 class="authentication-form-title">Sign Up</h1>
+  <br>
+  <br>
+  <form class="authentication-form" action="/signup" method="POST">
     <label for="name">Name</label>
     <input type="text" name="name"/>
     <br>
@@ -17,6 +19,8 @@
     <br>
     <label for="password">Password</label>
     <input type="password" name="password"/>
-    <button type="Submit">Sign Up</button>
+    <br>
+    <br>
+    <button class="authentication-button" type="Submit">Sign Up</button>
   </form>
 </body>

@@ -40,6 +40,23 @@ li {
   float: right;
 }
 
+/*Sign In page:::*/
+.authentication-form-title {
+  text-align: center;
+}
+
+.authentication-form {
+  text-align: center;
+}
+
+.authentication-form label {
+  width: 75px;
+}
+
+.authentication-button {
+  margin-left: 182px;
+}
+
 /*Album reviews:::*/
 .album-id {
   display: none;
